@@ -14,6 +14,14 @@ const BookingController = {
       res.status(400).send({ message: err.message });
     }
   },
+  getAll : async (req, res) =>{
+    try{
+        const bookings = await Booking.find().populate('post')
+        res.send(bookings)
+    } catch (error) {
+        res.status(404).send({message:err.message});
+    }
+},
 };
 
 module.exports = BookingController;

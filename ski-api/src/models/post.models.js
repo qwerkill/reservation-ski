@@ -20,6 +20,9 @@ const postSchema = new Schema({
   price: {
     type: Number,
   },
+  description: {
+    type: String,
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,

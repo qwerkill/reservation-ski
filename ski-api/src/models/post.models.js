@@ -9,13 +9,15 @@ const postSchema = new Schema({
     type: String,
   },
   weight: {
-    type: Number,
+    type: String,
+    enum:["Moins de 45kg","Entre 45 et 65kg","Plus de 65kg"]
   },
   size: {
     type: Number,
   },
   style: {
     type: String,
+    enum:["Freeride","Freestyle","Piste","Polyvalnt"]
   },
   price: {
     type: Number,

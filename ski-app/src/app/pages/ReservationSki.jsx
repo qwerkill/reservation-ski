@@ -74,13 +74,14 @@ const ReservationSki = ({ posts, setPosts, fetchPosts }) => {
               <h2>{post.title}</h2>
               <h3>{post.style}</h3>
               <h3>{post.weight} kilo</h3>
-              <h3>{post.size}m</h3>
+              <h3>{post.size}cm</h3>
               <h3>{post.price}€</h3>
               <h3>{post.description}</h3>
               <h3>{post.createdAt}</h3>
             </div>
-            <Link to="/detail"> <input type="button" value="Réserver" /> </Link>
-          </div>
+            <Link to={`/detail/${post._id}`}> <input type="button" value="Réserver" /> </Link>
+            
+          </div>      
         ))}
       </div>
     </div>

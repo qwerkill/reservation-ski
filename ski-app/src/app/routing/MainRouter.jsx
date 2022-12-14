@@ -36,7 +36,7 @@ const MainRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<ReservationSki posts={posts} setPosts={setPosts} />} />
-      <Route path="/detail" element={<Detail />} comments={comments}  setComments={setComments}  posts={posts} setPosts={setPosts} bookings={bookings} setBookings={setBookings} />
+      <Route path="/detail/:id" element={<Detail />} comments={comments}  setComments={setComments}  posts={posts} setPosts={setPosts} bookings={bookings} setBookings={setBookings} />
     </Routes>
   );
 };

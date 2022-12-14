@@ -1,12 +1,14 @@
-import ReservationSki from './app/ReservationSki';
-
-
+import { BrowserRouter } from "react-router-dom";
+import MainRouter from "./app/routing/MainRouter";
+import MainLayout from "./app/layouts/MainLayout";
 
 function App() {
   return (
-    <div className="App">
-      <ReservationSki/>
-    </div>
+    <BrowserRouter>
+      <MainLayout>
+        <MainRouter />
+      </MainLayout>
+    </BrowserRouter>
   );
 }
 

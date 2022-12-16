@@ -26,16 +26,16 @@ const CommentCreate = () => {
   return (
     <div>
       <form action=""  onSubmit={handleSubmit}>
-        <label htmlFor="userName">Nom</label>
         <input
           type="text"
           name="userName"
+          placeholder="userName"
           onChange={handleChange}
         />
-        <label htmlFor="description">Description</label>
         <input
           type="text"
           name="description"
+          placeholder="description"
           onChange={handleChange}
         />
         <label htmlFor="stars">Stars</label>

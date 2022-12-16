@@ -6,10 +6,10 @@ const commentSchema = new Schema({
         type: String,
     },
     description: {
-        type: String,
+        
     },
     stars: {
-        type: Number,
+        type: String,
         enum:["1","2","3","4","5"]
     },
     createdAt: {

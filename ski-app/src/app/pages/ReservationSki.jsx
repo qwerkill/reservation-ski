@@ -1,5 +1,4 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ReservationSki = ({ posts, setPosts, fetchPosts }) => {
@@ -78,14 +77,13 @@ const ReservationSki = ({ posts, setPosts, fetchPosts }) => {
             </div>
             <div className="text">
               <h2>{post.title}</h2>
-              <h3>{post.style}</h3>
+              <h3>C'est des ski de style: {post.style}</h3>
               <h3>{post.weight} kilo</h3>
-              <h3>{post.size}cm</h3>
+              <h3>Ils font {post.size}cm</h3>
               <h3>{post.price}€</h3>
-              <h3>{post.description}</h3>
-              <h3>{post.createdAt}</h3>
+              <h3>Voici leur description:  {post.description}</h3>
             </div>
-            <Link to={`/detail/${post._id}`}> <input type="button" value="Réserver" /> </Link>
+            <Link to={`/detail/${post._id}`}> <input type="button" value="Réserver" className="button" /> </Link>
             
           </div>      
         ))}

@@ -10,5 +10,6 @@ router.post(`${endPoint}`,PostController.create);
 router.put(`${endPoint}/:id`,PostController.update);
 router.delete(`${endPoint}/:id`,PostController.delete);
 router.get(`${endPoint}/:id/comments`,PostController.getComments);
+router.get(`${endPoint}/shops/:id`,PostController.getAllByShop);
 
 module.exports = router

@@ -45,6 +45,10 @@ const postSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  shop: {
+    type: Schema.Types.ObjectId,
+    ref: "Shop",
+  },
 });
 
 module.exports = mongoose.model("Post", postSchema);

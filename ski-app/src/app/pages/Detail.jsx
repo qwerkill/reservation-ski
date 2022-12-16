@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import postService from "../../setup/services/post.servise";
 import CommentCreate from "../components/CommentCreate";
 
@@ -12,7 +12,8 @@ const Detail = ({
   const { id } = useParams();
   const [postID, setPostId] = useState({});
   const [comments, setComments] = useState([]);
-  // const [bookings, setBookings] = useState([]);
+  // const [bookings, setBookings] = useState([]);*
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetPosts();
@@ -58,29 +59,36 @@ const Detail = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await postService.createBooking(credantials, id);
-      await postService.update(id, { isAvailable: false });
-      // fetchBookigs();
-      fetchPosts();
+      await postService.createBooking(credantials,id);
+      await postService.updatePost(id, { isAvailable: false });
+      navigate("/reservation");
     } catch (error) {
       console.log(error);
     }
   };
 
+  if(postID.isAvailable === false){
+    return console.log("Le ski n'est plus disponible")
+  }
+
   
+ // calcul de la moyenne des notes
   const average = (comments) => {
     let sum = 0;
-    for (let i = 0; i < comments.length; i++) {
-      sum += comments[i].stars;
-    }
-   return sum / comments.length;
-   };
+    comments.forEach((comment) => {
+      sum += comment.stars;
+    });
+    return sum / comments.length;
+  };
+
+  
+
 
 
   return (
     <div className="detail">
       <div className="detail_left">
-        <Link to="/">
+        <Link to="/reservation">
           <input type="button" value="Retour"/>
         </Link>
         <CommentCreate/>
@@ -109,12 +117,13 @@ const Detail = ({
             <p>{postID.description}</p>
             <form action="" onSubmit={handleSubmit}>
               <input
+                className="telephoneNumber"
                 type="text"
                 name="telephoneNumber"
                 placeholder="Entrez votre numéro de Telephone"
                 onChange={handleChange}
               />
-              <input type="button" value="Réserver" />
+              <input type="button" value="Réserver" className="telephone"  onSubmit={handleSubmit}/>
             </form>
           </div>
         </div>

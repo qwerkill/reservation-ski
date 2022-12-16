@@ -11,7 +11,7 @@ const BookingController = {
       await post.save();
       res.send(newBooking);
     } catch (error) {
-      res.status(400).send({ message: "aare" });
+      res.status(404).send({ message: "aare" });
     }
 },
 
@@ -30,7 +30,10 @@ const BookingController = {
     } catch (error) {
         res.status(404).send({message:err.message});
     }
-},
+}   
+
+
+
 };
 
 module.exports = BookingController;

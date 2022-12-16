@@ -49,6 +49,14 @@ const PostController = {
             res.status(404).send({message:err.message});
         }
     },
+    getAllByShop : async (req, res) =>{
+        try{
+            const posts = await Post.find({shop: req.params.id})
+            res.send(posts)
+        } catch (error) {
+            res.status(404).send({message:err.message});
+        }
+    }
 
 }
 

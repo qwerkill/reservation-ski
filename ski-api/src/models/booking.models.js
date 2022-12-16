@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const bookingSchema = new Schema({
     telephoneNumber: {
         type: String,
-        required: true,
     },
     createdAt: {
         type: Date,

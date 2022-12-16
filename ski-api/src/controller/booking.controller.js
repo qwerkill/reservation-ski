@@ -7,7 +7,7 @@ const BookingController = {
       const booking = new Booking(req.body);
       const newBooking = await booking.save();
       const post = await Post.findById(req.body.post);
-      post.booking.push(newBooking._id);
+      post.bookings.push(newBooking._id);
       await post.save();
       res.send(newBooking);
     } catch (error) {

@@ -12,12 +12,12 @@ const Detail = ({
   const { id } = useParams();
   const [postID, setPostId] = useState({});
   const [comments, setComments] = useState([]);
-  const [bookings, setBookings] = useState([]);
+  // const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     fetPosts();
     fetchComments();
-    fetchBookigs();
+    // fetchBookigs();
   }, [id]);
 
   
@@ -39,14 +39,14 @@ const Detail = ({
     }
   };
 
-  const fetchBookigs = async (e) => {
-    try {
-      const bookings = await postService.findBookingsByPostId(id);
-      setBookings(bookings);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchBookigs = async (e) => {
+  //   try {
+  //     const bookings = await postService.findBookingsByPostId(id);
+  //     setBookings(bookings);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   
 
   const handleChange = async (e) => {
@@ -60,7 +60,7 @@ const Detail = ({
     try {
       await postService.createBooking(credantials, id);
       await postService.update(id, { isAvailable: false });
-      fetchBookigs();
+      // fetchBookigs();
       fetchPosts();
     } catch (error) {
       console.log(error);

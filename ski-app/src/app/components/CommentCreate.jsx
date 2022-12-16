@@ -6,9 +6,10 @@ import postService from "../../setup/services/post.servise";
 const CommentCreate = () => {
   const { id } = useParams();
   const [credantials, setCredantials] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = async (e) => {
-    const { name, value } = e.target;
+    const { name, value } = await e.target;
     setCredantials({ ...credantials, [name]: value });
   };
   
@@ -17,25 +18,24 @@ const CommentCreate = () => {
     e.preventDefault();
     try {
       await postService.createComment(credantials,id);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <div>
-      <form action="" onSubmit={(e) => handleSubmit(e)}>
+      <form action=""  onSubmit={handleSubmit}>
         <label htmlFor="userName">Nom</label>
         <input
           type="text"
           name="userName"
-          id="userName"
           onChange={handleChange}
         />
         <label htmlFor="description">Description</label>
         <input
           type="text"
           name="description"
-          id="description"
           onChange={handleChange}
         />
         <label htmlFor="stars">Stars</label>

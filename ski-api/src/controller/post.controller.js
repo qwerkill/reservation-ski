@@ -40,6 +40,15 @@ const PostController = {
             res.status(400).send({message:err.message});
         }
     },
+    // trouver les commentaires d'un post
+    getComments : async (req, res) =>{
+        try{
+            const post = await Post.findById(req.params.id).populate('comments')
+            res.send(post.comments)
+        } catch (error) {
+            res.status(404).send({message:err.message});
+        }
+    },
 
 }
 

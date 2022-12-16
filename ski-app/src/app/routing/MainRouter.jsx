@@ -5,13 +5,10 @@ import { useEffect, useState } from "react";
 
 const MainRouter = () => {
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     fetchPosts();
-    fetchComments();
-    fetchBookings();
+    
   }, []);
 
   const fetchPosts = async () => {
@@ -20,23 +17,13 @@ const MainRouter = () => {
       .then((data) => setPosts(data));
   };
 
-  const fetchComments = async () => {
-    fetch("http://localhost:8000/api/comments")
-      .then((response) => response.json())
-      .then((data) => setComments(data));
-  };
 
-    const fetchBookings = async () => {
-    fetch("http://localhost:8000/api/bookings")
-        .then((response) => response.json())
-        .then((data) => setBookings(data));
-    };
 
 
   return (
     <Routes>
       <Route path="/" element={<ReservationSki posts={posts} setPosts={setPosts} />} />
-      <Route path="/detail/:id" element={<Detail />} comments={comments}  setComments={setComments}  posts={posts} setPosts={setPosts} bookings={bookings} setBookings={setBookings} />
+      <Route path="/detail/:id" element={<Detail />}  posts={posts} setPosts={setPosts} />
     </Routes>
   );
 };

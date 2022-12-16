@@ -5,22 +5,22 @@ import CommentCreate from "../components/CommentCreate";
 
 const Detail = ({
   posts,
-  comments,
   bookings,
   setPosts,
   setBookings,
-  setComments,
   fetchPosts,
   fetchBookigs,
-  fetchComments,
 }) => {
   const { id } = useParams();
   const [postID, setPostId] = useState({});
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetPosts();
+    fetchComments();
   }, [id]);
 
+  
   const fetPosts = async (e) => {
     try {
       const post = await postService.findOneById(id);
@@ -29,6 +29,17 @@ const Detail = ({
       console.log(error);
     }
   };
+  
+  const fetchComments = async (e) => {
+    try {
+      const comments = await postService.findCommentsByPostId(id);
+      setComments(comments);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
 
   return (
     <div className="detail">
@@ -37,6 +48,16 @@ const Detail = ({
           <input type="button" value="Retour"/>
         </Link>
         <CommentCreate/>
+        <div className="detail__left__bottom">
+          <h2>Commentaires</h2>
+          {comments.map((comment) => (
+            <div className="detail__left__bottom__comment">
+              <h3>{comment.userName}</h3>
+              <p>{comment.description}</p>
+              <p>{comment.stars}</p>
+              </div>
+          ))}
+          </div>
       </div>
       <div className="detail__right">
         <div className="detail__top">
@@ -53,7 +74,7 @@ const Detail = ({
                 name="telephoneNumber"
                 placeholder="Entrez votre numéro de Telephone"
               />
-              <input type="submtit" value="Réserver" />
+              <input type="button" value="Réserver" />
             </form>
           </div>
         </div>

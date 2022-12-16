@@ -14,6 +14,22 @@ const CommentController = {
       res.status(400).send({ message: "aare" });
     }
   },
+  getAllByPost: async (req, res) => {
+    try {
+      const comments = await Comment.find({ post: req.params.id });
+      res.send(comments);
+    } catch (error) {
+      res.status(404).send({ message: err.message });
+    }
+  },
+  getAll : async (req, res) =>{
+    try{
+        const comments = await Comment.find()
+        res.send(comments)
+    } catch (error) {
+        res.status(404).send({message:err.message});
+    }
+},
 };
 
 module.exports = CommentController;

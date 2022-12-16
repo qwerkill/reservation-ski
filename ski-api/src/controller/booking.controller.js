@@ -14,7 +14,7 @@ const BookingController = {
       res.status(400).send({ message: err.message });
     }
   },
-  getAll : async (req, res) =>{
+  getAllByPost : async (req, res) =>{
     try{
         const bookings = await Booking.find().populate('post')
         res.send(bookings)

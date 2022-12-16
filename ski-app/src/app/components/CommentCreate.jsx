@@ -1,27 +1,29 @@
+import { Button } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import postService from "../../setup/services/post.servise";
 
 const CommentCreate = () => {
+  const { id } = useParams();
   const [credantials, setCredantials] = useState({});
-  
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
     setCredantials({ ...credantials, [name]: value });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await postService.createComment(credantials);
+      await postService.createComment(credantials,id);
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <div>
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="userName">Nom</label>
         <input
           type="text"
@@ -45,7 +47,15 @@ const CommentCreate = () => {
           <option value="5">5</option>
         </select>
       </form>
-        <input type="button" value="Envoyer"/>
+      <Button
+        variant="contained"
+        color="primary"
+        size="small"
+        sx={{ mt: 2 }}
+        type="submit"
+      >
+        Enregistrer
+      </Button>
     </div>
   );
 };

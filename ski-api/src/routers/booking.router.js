@@ -6,5 +6,6 @@ const endPoint = '/bookings';
 
 router.post(`${endPoint}`, BookingController.create);
 router.get(`${endPoint}/posts/;id`, BookingController.getAllByPost);
+router.get(`${endPoint}`, BookingController.getAll);
 
 module.exports = router

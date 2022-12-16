@@ -5,19 +5,19 @@ import CommentCreate from "../components/CommentCreate";
 
 const Detail = ({
   posts,
-  bookings,
   setPosts,
-  setBookings,
-  fetchPosts,
-  fetchBookigs,
+  fetchPosts  
 }) => {
+  const [credantials, setCredantials] = useState({});
   const { id } = useParams();
   const [postID, setPostId] = useState({});
   const [comments, setComments] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     fetPosts();
     fetchComments();
+    fetchBookigs();
   }, [id]);
 
   
@@ -38,7 +38,43 @@ const Detail = ({
       console.log(error);
     }
   };
+
+  const fetchBookigs = async (e) => {
+    try {
+      const bookings = await postService.findBookingsByPostId(id);
+      setBookings(bookings);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   
+
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+    setCredantials({ ...credantials, [name]: value });
+  };
+  
+  // au submit creer le booking et passe isAvable a false
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await postService.createBooking(credantials, id);
+      await postService.update(id, { isAvailable: false });
+      fetchBookigs();
+      fetchPosts();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+  const average = (comments) => {
+    let sum = 0;
+    for (let i = 0; i < comments.length; i++) {
+      sum += comments[i].stars;
+    }
+   return sum / comments.length;
+   };
 
 
   return (
@@ -54,7 +90,7 @@ const Detail = ({
             <div className="detail__left__bottom__comment">
               <h3>{comment.userName}</h3>
               <p>{comment.description}</p>
-              <p>{comment.stars}</p>
+              <p>Voici la note : {comment.stars}</p>
               </div>
           ))}
           </div>
@@ -64,15 +100,19 @@ const Detail = ({
           <div className="detail__top__left">
             <img src={postID.image} alt="ski" />
             <h2>{postID.title}</h2>
+            {average(comments) > 0 && (
+              <p>La note moyenne est de {average(comments)}</p>
+            )}
             <h3>
               {postID.price}€/j {postID.size}cm
             </h3>
             <p>{postID.description}</p>
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="telephoneNumber"
                 placeholder="Entrez votre numéro de Telephone"
+                onChange={handleChange}
               />
               <input type="button" value="Réserver" />
             </form>

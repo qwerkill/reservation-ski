@@ -1,4 +1,5 @@
 import { Autocomplete, TextField } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ReservationSki = ({ posts, setPosts, fetchPosts }) => {
@@ -29,6 +30,11 @@ const ReservationSki = ({ posts, setPosts, fetchPosts }) => {
     });
     return filtered;
   };
+  // afficher les resultats de la recherche du filtre
+
+
+
+  
 
   return (
     <div>
@@ -41,8 +47,8 @@ const ReservationSki = ({ posts, setPosts, fetchPosts }) => {
           filterOptions={filterOptions}
           renderInput={(params) => (
             <TextField {...params} label="Les tailles" variant="outlined" />
-          )}
-        />
+            )}
+            />
         <Autocomplete
           id="combo-box-demo"
           options={posts}

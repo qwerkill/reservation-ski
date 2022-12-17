@@ -61,7 +61,7 @@ const Detail = ({
     try {
       await postService.createBooking(credantials,id);
       await postService.updatePost(id, { isAvailable: false });
-      navigate("/reservation");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

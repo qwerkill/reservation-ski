@@ -14,7 +14,11 @@ const shopSchema = new Schema({
     ],
     address: {
         type: String,
-    }
+    },
+    logo: {
+        type: String,
+    },
+    
 
 });
 

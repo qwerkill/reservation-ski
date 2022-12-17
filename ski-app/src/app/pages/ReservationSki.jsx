@@ -88,6 +88,7 @@ const ReservationSki = ({ posts, setPosts, fetchPosts }) => {
           </div>      
         ))}
       </div>
+      <Link to={`/shop`}> <input type="button" value="Réserver" className="button" /> </Link>
     </div>
   );
 };

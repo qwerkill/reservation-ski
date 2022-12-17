@@ -40,6 +40,11 @@ const update = async (credentials) => {
     return response.data;
 };
 
+const create = async (credentials) => {
+    const response = await instance.post(`${END_POINT}`, credentials);
+    return response.data;
+};
+
 
 
 
@@ -51,6 +56,7 @@ const postService = {
     findCommentsByPostId,
     createComment,
     createBooking,
+    create,
     findBookingsByPostId
 }
 
